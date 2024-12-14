@@ -4,6 +4,7 @@ import { Heart, Download } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import CustomImage from "./ui/image";
 
 interface WallpaperCardProps {
   id: string;
@@ -27,7 +28,7 @@ export function WallpaperCard({
   return (
     <div className="group relative overflow-hidden rounded-lg shadow-md transition-all hover:shadow-lg">
       <Link href={`/wallpaper/${id}`}>
-        <Image
+        <CustomImage
           src={thumbs.large}
           alt={title}
           width={400}
