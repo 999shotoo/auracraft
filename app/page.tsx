@@ -11,8 +11,8 @@ export default async function Home() {
   const homedata = await fetchHome();
   return (
     <div className="space-y-8">
-      <section className="text-center py-12 bg-gradient-to-r bg-primary rounded-lg  text-white">
-        <h1 className="text-4xl font-bold mb-4">Welcome to AuraCraft</h1>
+      <section className="text-center py-12 px-2 bg-gradient-to-r bg-primary rounded-lg  text-white">
+        <h1 className="text-2xl font-bold mb-4">Welcome to AuraCraft</h1>
         <p className="text-xl mb-6">Discover and share stunning wallpapers</p>
         <div className="flex items-center justify-center space-x-2 max-w-md mx-auto">
           <Input
@@ -32,7 +32,7 @@ export default async function Home() {
           <Sparkles className="h-6 w-6 mr-2 text-yellow-500" />
           Featured Wallpapers
         </h2>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 grid-cols-2 lg:grid-cols-4">
           {homedata.data.map((wallpaper: any) => (
             <WallpaperCard key={wallpaper.id} {...wallpaper} />
           ))}

@@ -11,31 +11,26 @@ function LoadMore() {
   const [data, setData] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(2);
   const [hasMore, setHasMore] = useState(true); // Track if there are more pages to load
 
   useEffect(() => {
     if (inView && !isLoading && hasMore) {
-      console.log("Fetching data for page:", page);
       setIsLoading(true);
 
       fetchHome(page)
         .then((response) => {
-          console.log("Fetched data:", response);
           if (response && response.data) {
             setData((prevData) => [...prevData, ...response.data]);
             setPage((prevPage) => prevPage + 1);
-            // Check if we've reached the last page
             if (page >= response.meta.last_page) {
               setHasMore(false); // No more pages to load
             }
           } else {
-            console.error("No data found in response");
             setHasMore(false); // No more data available
           }
         })
         .catch((error) => {
-          console.error("Error fetching wallpapers:", error);
           setError("Failed to load wallpapers. Please try again.");
         })
         .finally(() => {
@@ -50,13 +45,13 @@ function LoadMore() {
 
   return (
     <>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-6 grid-cols-2 lg:grid-cols-4">
         {data.length > 0 ? (
           data.map((wallpaper: any) => (
             <WallpaperCard key={wallpaper.id} {...wallpaper} />
           ))
         ) : (
-          <h1>No wallpapers available.</h1> // Empty state
+          <></>
         )}
       </div>
       <section className="flex justify-center items-center w-full">
