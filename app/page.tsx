@@ -5,41 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Search, Sparkles, TrendingUp, Clock } from "lucide-react";
 import { ThemeToggle } from "@/components/buttons/themetoggle";
 import { fetchHome } from "@/action/fetch/fetchhome";
-
-const featuredWallpapers = [
-  {
-    id: "1",
-    title: "Neon City",
-    artist: "CyberArtist",
-    imageUrl:
-      "https://th.wallhaven.cc/lg/vq/vq85mp.jpg?height=225&width=400&text=Neon+City",
-    likes: 1200,
-  },
-  {
-    id: "2",
-    title: "Serene Forest",
-    artist: "NatureLover",
-    imageUrl:
-      "https://th.wallhaven.cc/lg/vq/vq85mp.jpg?height=225&width=400&text=Serene+Forest",
-    likes: 980,
-  },
-  {
-    id: "3",
-    title: "Abstract Waves",
-    artist: "ModernArtist",
-    imageUrl:
-      "https://th.wallhaven.cc/lg/vq/vq85mp.jpg?height=225&width=400&text=Abstract+Waves",
-    likes: 1500,
-  },
-  {
-    id: "4",
-    title: "Cosmic Journey",
-    artist: "SpaceExplorer",
-    imageUrl:
-      "https://th.wallhaven.cc/lg/vq/vq85mp.jpg?height=225&width=400&text=Cosmic+Journey",
-    likes: 2200,
-  },
-];
+import LoadMore from "@/components/home/loadmore";
 
 export default async function Home() {
   const homedata = await fetchHome();
@@ -72,42 +38,7 @@ export default async function Home() {
           ))}
         </div>
       </section>
-
-      <div className="grid gap-8 sm:grid-cols-2">
-        <section>
-          <h2 className="text-2xl font-semibold mb-4 flex items-center">
-            <TrendingUp className="h-6 w-6 mr-2 text-green-500" />
-            Top Rated
-          </h2>
-          <div className="grid gap-4">
-            {homedata.data.slice(0, 2).map((wallpaper: any) => (
-              <WallpaperCard key={wallpaper.id} {...wallpaper} />
-            ))}
-          </div>
-        </section>
-
-        <section>
-          <h2 className="text-2xl font-semibold mb-4 flex items-center">
-            <Clock className="h-6 w-6 mr-2 text-blue-500" />
-            Latest Uploads
-          </h2>
-          <div className="grid gap-4">
-            {homedata.data.slice(2, 4).map((wallpaper: any) => (
-              <WallpaperCard key={wallpaper.id} {...wallpaper} />
-            ))}
-          </div>
-        </section>
-      </div>
-
-      <section className="text-center py-8 bg-muted rounded-lg">
-        <h2 className="text-2xl font-semibold mb-4">Join Our Community</h2>
-        <p className="mb-6">
-          Upload your own wallpapers and get inspired by others
-        </p>
-        <Button size="lg" asChild>
-          <Link href="/register">Sign Up Now</Link>
-        </Button>
-      </section>
+      <LoadMore />
       <ThemeToggle />
     </div>
   );
