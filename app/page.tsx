@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, Sparkles, TrendingUp, Clock } from "lucide-react";
 import { ThemeToggle } from "@/components/buttons/themetoggle";
+import { fetchHome } from "@/action/fetch/fetchhome";
 
 const featuredWallpapers = [
   {
@@ -40,7 +41,8 @@ const featuredWallpapers = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const homedata = await fetchHome();
   return (
     <div className="space-y-8">
       <section className="text-center py-12 bg-gradient-to-r bg-primary rounded-lg  text-white">
@@ -65,7 +67,7 @@ export default function Home() {
           Featured Wallpapers
         </h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {featuredWallpapers.map((wallpaper) => (
+          {homedata.data.map((wallpaper: any) => (
             <WallpaperCard key={wallpaper.id} {...wallpaper} />
           ))}
         </div>
@@ -78,7 +80,7 @@ export default function Home() {
             Top Rated
           </h2>
           <div className="grid gap-4">
-            {featuredWallpapers.slice(0, 2).map((wallpaper) => (
+            {homedata.data.slice(0, 2).map((wallpaper: any) => (
               <WallpaperCard key={wallpaper.id} {...wallpaper} />
             ))}
           </div>
@@ -90,7 +92,7 @@ export default function Home() {
             Latest Uploads
           </h2>
           <div className="grid gap-4">
-            {featuredWallpapers.slice(2, 4).map((wallpaper) => (
+            {homedata.data.slice(2, 4).map((wallpaper: any) => (
               <WallpaperCard key={wallpaper.id} {...wallpaper} />
             ))}
           </div>

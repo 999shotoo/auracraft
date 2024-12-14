@@ -8,23 +8,27 @@ import { Button } from "@/components/ui/button";
 interface WallpaperCardProps {
   id: string;
   title: string;
-  artist: string;
-  imageUrl: string;
+  path: string;
+  thumbs: {
+    large: string;
+    small: string;
+    original: string;
+  };
   likes: number;
 }
 
 export function WallpaperCard({
   id,
   title,
-  artist,
-  imageUrl,
+  path,
+  thumbs,
   likes,
 }: WallpaperCardProps) {
   return (
     <div className="group relative overflow-hidden rounded-lg shadow-md transition-all hover:shadow-lg">
       <Link href={`/wallpaper/${id}`}>
         <Image
-          src={imageUrl}
+          src={thumbs.large}
           alt={title}
           width={400}
           height={225}
@@ -34,7 +38,6 @@ export function WallpaperCard({
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
       <div className="absolute bottom-0 left-0 right-0 p-4 text-white opacity-0 transition-opacity group-hover:opacity-100">
         <h3 className="text-lg font-semibold">{title}</h3>
-        <p className="text-sm">{artist}</p>
       </div>
       <div className="absolute right-2 top-2 flex space-x-2">
         <Button
